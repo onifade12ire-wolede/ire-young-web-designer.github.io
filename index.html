@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sign up to Ire Tech</title>
+    <link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
+    <div class="bg-decor" aria-hidden="true"></div>
+    <a class="skip-link" href="#signupForm">Skip to sign-up form</a>
+    <div class="signUpbox">
+        <h2 id="signupHeading">Sign up to Ire Tech</h2>
+
+        <form id="signupForm" action="#" novalidate role="form" aria-labelledby="signupHeading">
+            <label for="first" class="sr-only">First name</label>
+            <input id="first" type="text" name="first" placeholder="First name" required aria-required="true">
+
+            <label for="last" class="sr-only">Last name</label>
+            <input id="last" type="text" name="last" placeholder="Last name" required aria-required="true">
+
+            <label for="password" class="sr-only">Password</label>
+            <input id="password" type="password" name="password" placeholder="Password" required aria-required="true">
+
+            <label for="confirm" class="sr-only">Confirm password</label>
+            <input id="confirm" type="password" name="confirm" placeholder="Confirm password" required aria-required="true" aria-describedby="pwdMsg">
+            <div id="pwdMsg" aria-live="polite" role="status" style="color: #ffcc00; font-size: 0.9em; text-align:left; margin-top:6px; margin-bottom:6px;">&nbsp;</div>
+
+            <label for="phone" class="sr-only">Phone number</label>
+            <input id="phone" type="tel" name="phone" placeholder="Phone number" required aria-required="true">
+
+            <label for="email" class="sr-only">Email</label>
+            <input id="email" type="email" name="email" placeholder="Email" required aria-required="true">
+
+            <input id="submitBtn" type="submit" value="Sign up">
+            <div id="formStatus" class="sr-only" role="status" aria-live="polite">&nbsp;</div>
+        </form>
+
+        <script>
+            (function(){
+                const form = document.getElementById('signupForm');
+                const pwd = document.getElementById('password');
+                const confirm = document.getElementById('confirm');
+                const msg = document.getElementById('pwdMsg');
+                const submit = document.getElementById('submitBtn');
+                function validate() {
+                    if (!pwd.value || !confirm.value) {
+                        msg.textContent = '\u00A0';
+                        submit.disabled = false;
+                        return;
+                    }
+                    if (pwd.value !== confirm.value) {
+                        msg.textContent = 'Passwords do not match.';
+                        submit.disabled = true;
+                    } else {
+                        msg.textContent = 'Passwords match.';
+                        submit.disabled = false;
+                    }
+                }
+                pwd.addEventListener('input', validate);
+                confirm.addEventListener('input', validate);
+                const formStatus = document.getElementById('formStatus');
+                form.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    if (submit.disabled) {
+                        formStatus.textContent = 'Please resolve validation errors before submitting.';
+                        return;
+                    }
+                    formStatus.textContent = 'Form submitted (demo).';
+                    msg.textContent = 'Form submitted.';
+                });
+            })();
+        </script>
+    </div>
+</body>
+</html>
